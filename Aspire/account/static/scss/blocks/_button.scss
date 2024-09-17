@@ -1,0 +1,16 @@
+.button {
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -2px;
+  color: var(--color-light);
+  background-color: var(--color-red);
+  padding-inline: var(--button-padding-x);
+  padding-block: var(--button-padding-y);
+  border: 0;
+  border-radius: var(--border-radius-small);
+
+  @include hover {
+    background-color: var(--color-light);
+    color: var(--color-red);
+  }
+}

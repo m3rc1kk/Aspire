@@ -1,0 +1,24 @@
+:root {
+  --gradient-dark: linear-gradient(#252525, #282828);
+  --color-dark: #313131;
+  --color-light: #FFFFFF;
+  --color-light-trans: rgba(255, 255, 255, 0.8);
+  --color-red: #FF4A4A;
+
+  --container-width: 1816px;
+  --container-padding-x: 15px;
+
+  --font-family-base: 'Lexend', sans-serif;
+  --font-family-add: 'Futura', sans-serif;
+  --font-family-title: 'Intro', sans-serif;
+
+  --button-padding-x: 100px;
+  --button-padding-y: 20px;
+  --input-height: 100px;
+  --input-width: 1000px;
+
+  --border-radius-large: 30px;
+  --border-radius-small: 10px;
+
+  --transition-duration: .2s;
+}

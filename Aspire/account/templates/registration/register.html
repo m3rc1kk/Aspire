@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+    <div class="register__form-wrapper form-wrapper">
+      <img class="register__form-logo form__logo" src="{% static 'images/logo.png' %}" width="91" height="91" loading="lazy">
+      <h1 class="form__title ">Register</h1>
+      <form method="post" class="register__form form" autocomplete="off">
+          {% render_field form.title class+="register__form-title form__title" %}
+          <ul class="form__input-list">
+            <li>{% render_field form.username class+="register__form-username form__input-item" placeholder='Username' autocomplete="new-password" %}</li>
+            <li>{% render_field form.email class+="register__form-email form__input-item" placeholder='E-mail' autocomplete="new-password" %}</li>
+            <li>{% render_field form.password class+="register__form-password form__input-item" placeholder='Password' autocomplete="new-password" %}</li>
+            <li>{% render_field form.password2 class+="register__form-password2 form__input-item" placeholder='Repeat Password' autocomplete="new-password" %}</li>
+          
+          </ul>
+
+          {% for error in form.errors.values %}
+            <span class="error">{{ error }}</span>
+          {% endfor %}
+          
+          {% csrf_token %}
+          <button type="submit" class="register__form-button button">Sign Up</button>
+      </form>
+      <a href="{% url 'login' %}" class="register__form-subtitle form__subtitle">Login</a>
+    </div>
+{% endblock %}

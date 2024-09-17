@@ -1,0 +1,33 @@
+body {
+  background: var(--gradient-dark);
+  color: var(--color-light);
+  font-weight: 400;
+  font-family: var(--font-family-base);
+  line-height: normal;
+}
+
+a, 
+button,
+input,
+textarea,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 72px;
+  letter-spacing: -3px;
+}
+
+h2 {
+  font-size: 48px;
+  letter-spacing: -3px;
+}
+
+
+

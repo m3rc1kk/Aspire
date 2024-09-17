@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+    <div class="login__form-wrapper form-wrapper">
+      <img class="login__form-logo form__logo" src="{% static 'images/logo.png' %}" width="91" height="91" loading="lazy">
+      <h1 class="form__title ">Login</h1>
+      <form method="post" class="login__form form" autocomplete="off">
+          {% render_field form.title class+="login__form-title form__title" %}
+          <ul class="form__input-list">
+            <li>{% render_field form.username class+="login__form-username form__input-item" placeholder='Username' autocomplete="new-password" %}</li>
+            <li>{% render_field form.password class+="login__form-password form__input-item" placeholder='Password' autocomplete="new-password" %}</li>
+          </ul>
+          {% for error in form.errors.values %}
+            <span class="error">{{ error }}</span>
+          {% endfor %}
+          {% csrf_token %}
+          <button type="submit" class="login__form-button button">Login</button>
+      </form>
+      <a href="{% url 'register' %}" class="login__form-subtitle form__subtitle">Registration</a>
+      <a href="{% url 'password_reset' %}" class="login__form-subtitle form__subtitle">Forgot Password</a>
+      <a href="{% url "social:begin" "google-oauth2" %}" class = 'login__form-subtitle form__subtitle'>
+          <img src="{% static 'images/google_logo.jpg' %}" width='36' height='36' loading = lazy class='form__image-social'>
+      </a>
+    </div>
+{% endblock %}

@@ -1,0 +1,423 @@
+@charset "UTF-8";
+:root {
+  --gradient-dark: linear-gradient(#252525, #282828);
+  --color-dark: #313131;
+  --color-light: #FFFFFF;
+  --color-light-trans: rgba(255, 255, 255, 0.8);
+  --color-red: #FF4A4A;
+  --container-width: 1816px;
+  --container-padding-x: 15px;
+  --font-family-base: "Lexend", sans-serif;
+  --font-family-add: "Futura", sans-serif;
+  --font-family-title: "Intro", sans-serif;
+  --button-padding-x: 100px;
+  --button-padding-y: 20px;
+  --input-height: 100px;
+  --input-width: 1000px;
+  --border-radius-large: 30px;
+  --border-radius-small: 10px;
+  --transition-duration: .2s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями
+ */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+}
+
+/**
+  Плавный скролл
+ */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+ */
+svg *[fill] {
+  fill: currentColor;
+}
+
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+.container {
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+@media (max-width: 767px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hidden-tablet {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .visible-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .visible-tablet {
+    display: none !important;
+  }
+}
+
+@font-face {
+  font-family: "Lexend";
+  src: url("../../fonts/Lexend-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lexend";
+  src: url("../../fonts/Lexend-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lexend";
+  src: url("../../fonts/Lexend-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lexend";
+  src: url("../../fonts/Lexend-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Intro";
+  src: url("../../fonts/Intro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futura";
+  src: url("../../fonts/FuturaBookC.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+body {
+  background: var(--gradient-dark);
+  color: var(--color-light);
+  font-weight: 400;
+  font-family: var(--font-family-base);
+  line-height: normal;
+}
+
+a,
+button,
+input,
+textarea,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 72px;
+  letter-spacing: -3px;
+}
+
+h2 {
+  font-size: 48px;
+  letter-spacing: -3px;
+}
+
+.button {
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -2px;
+  color: var(--color-light);
+  background-color: var(--color-red);
+  padding-inline: var(--button-padding-x);
+  padding-block: var(--button-padding-y);
+  border: 0;
+  border-radius: var(--border-radius-small);
+}
+@media (hover: hover) {
+  .button:hover {
+    background-color: var(--color-light);
+    color: var(--color-red);
+  }
+}
+@media (hover: none) {
+  .button:active {
+    background-color: var(--color-light);
+    color: var(--color-red);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+}
+.form__input-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  padding-block: 52px 48px;
+}
+.form__input-item {
+  width: var(--input-width);
+  height: var(--input-height);
+  background-color: var(--color-dark);
+  color: var(--color-light-trans);
+  border-radius: var(--border-radius-large);
+  border: 0;
+  padding-left: 24px;
+  font-weight: 400;
+  font-size: 28px;
+}
+.form__subtitle {
+  font-size: 20px;
+  padding-top: 16px;
+}
+@media (hover: hover) {
+  .form__subtitle:hover {
+    opacity: 0.7;
+  }
+}
+@media (hover: none) {
+  .form__subtitle:active {
+    opacity: 0.7;
+  }
+}
+.form__title {
+  padding-top: 16px;
+}
+.form__image-social {
+  border-radius: 50%;
+}
+
+.errorlist {
+  padding-bottom: 30px;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.reset__complete-title {
+  max-width: 610px;
+  text-align: center;
+  padding-block: 16px 48px;
+}
+.reset-done__complete-title {
+  max-width: 700px;
+  text-align: center;
+  padding-top: 40px;
+  font-weight: 500;
+  position: relative;
+}
+.reset-done__complete-title::before {
+  content: "";
+  display: block;
+  width: 94px;
+  height: 2px;
+  background-color: var(--color-light);
+  border-radius: var(--border-radius-small);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 25px;
+}
+
+.file-upload {
+  position: relative;
+  display: inline-block;
+}
+.file-input {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.file-label {
+  display: inline-block;
+  color: var(--color-light);
+  font-weight: 400;
+  font-size: 32px;
+  padding-bottom: 48px;
+  transition-duration: var(--transition-duration);
+}
+@media (hover: hover) {
+  .file-label:hover {
+    opacity: 0.8;
+  }
+}
+@media (hover: none) {
+  .file-label:active {
+    opacity: 0.8;
+  }
+}/*# sourceMappingURL=styles.css.map */
