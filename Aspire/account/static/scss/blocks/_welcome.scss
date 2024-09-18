@@ -1,0 +1,35 @@
+.welcome {
+  background: url('../../images/bg_welcome.png'), linear-gradient(#252525, #FF4242);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    font-family: var(--font-family-title);
+    font-size: 200px;
+    padding-block: 30px 24px;  
+  }
+
+  &__description {
+    padding-bottom: 52px;
+    font-size: 32px;
+    max-width: 625px;
+    text-align: center;
+    font-family: var(--font-family-add);
+    font-weight: 400;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+    border-radius: var(--border-radius-large);
+  }
+}

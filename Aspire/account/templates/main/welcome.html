@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="welcome">
+  <div class="welcome__inner">
+    <img src="{% static 'images/logo.png' %}" width="91" height="91" loading="lazy">
+    <h1 class="welcome__title">ASPIRE</h1>
+    <div class="welcome__description">
+      <p>Unleash your potential in design and find your dream job. We will be happy to help you with this.</p>
+    </div>
+    <a class="button button--white welcome__button" href="{% url 'login' %}">Let's Go<img class="welcome__button-icon" src="{% static 'images/button.svg' %}" width="36" height="36" loading="lazy"></a>
+  </div>
+</div>
+
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

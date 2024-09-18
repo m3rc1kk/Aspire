@@ -13,4 +13,14 @@
     background-color: var(--color-light);
     color: var(--color-red);
   }
+
+  &--white {
+    background-color: var(--color-light);
+    color: var(--color-red);
+
+    @include hover {
+      background-color: var(--color-red);
+      color: var(--color-light);
+    }
+  }
 }

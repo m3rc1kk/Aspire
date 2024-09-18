@@ -1,5 +1,4 @@
 .file {
-
     &-upload {
       position: relative;
       display: inline-block;
@@ -24,4 +23,17 @@
         opacity: .8;
       }
     }
+
+    &__image-label {
+      padding-bottom: 10px;
+      font-weight: 500;
+      letter-spacing: -2px;
+    }
+
+    &__preview-label {
+      font-weight: 500;
+      letter-spacing: -2px;
+    }
+
+    
 }

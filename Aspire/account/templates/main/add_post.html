@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+    <div class="register__form-wrapper form-wrapper">
+      <img class="register__form-logo form__logo" src="{% static 'images/logo.png' %}" width="91" height="91" loading="lazy">
+      <h1 class="form__title ">Share Work</h1>
+      <form method="post" class="register__form form" enctype="multipart/form-data">
+          {% render_field user_form.title class+="register__form-title form__title" %}
+          <ul class="form__input-list">
+            <li>{% render_field form.title class+="register__form-username form__input-item" placeholder='Title' autocomplete="new-password" %}</li>
+          </ul>
+          <div class="file-upload">
+              {{ form.image|add_class:'file-input'|attr:'id:file_image'}}
+              <label for="file_image" class="file__image-label file-label">Add an Image</label>
+          </div>
+          <div class="file-upload">
+              {{ form.preview|add_class:'file-input'|attr:'id:file_preview'}}
+              <label for="file_preview" class="file-label file__preview-label">Add Preview</label>
+          </div>
+          {% for error in form.errors.values %}
+            <span class="error">{{ error }}</span>
+          {% endfor %}
+          {% csrf_token %}
+          <button type="submit" class="register__form-button button">Share</button>
+      </form>
+    </div>
+{% endblock %}

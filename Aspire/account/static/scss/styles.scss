@@ -1,13 +1,14 @@
 @import 
+  'fonts',
   'media',
   'variables', 
   'normalize', 
   'utils', 
-  'fonts',
   'globals';
 
 @import  
   'blocks/button',
   'blocks/form',
   'blocks/reset',
-  'blocks/file';
+  'blocks/file',
+  'blocks/welcome';

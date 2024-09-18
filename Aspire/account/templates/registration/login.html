@@ -20,7 +20,7 @@
       <a href="{% url 'register' %}" class="login__form-subtitle form__subtitle">Registration</a>
       <a href="{% url 'password_reset' %}" class="login__form-subtitle form__subtitle">Forgot Password</a>
       <a href="{% url "social:begin" "google-oauth2" %}" class = 'login__form-subtitle form__subtitle'>
-          <img src="{% static 'images/google_logo.jpg' %}" width='36' height='36' loading = lazy class='form__image-social'>
+          <img src="{% static 'images/google_logo.jpg' %}" width='36' height='36' loading = 'lazy' class='form__image-social'>
       </a>
     </div>
 {% endblock %}
