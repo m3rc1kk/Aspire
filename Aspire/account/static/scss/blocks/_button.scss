@@ -23,4 +23,15 @@
       color: var(--color-light);
     }
   }
+
+  &--transparent {
+    font-size: 20px;
+    background: transparent;
+    padding-block: 15px;
+    padding-inline: 60px;
+    border-radius: var(--border-radius-large);
+    border: 1px solid var(--color-light);
+    font-weight: 500;
+    letter-spacing: -1.5px;
+  }
 }

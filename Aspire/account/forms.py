@@ -58,7 +58,7 @@ class ProfileEditForm(forms.ModelForm):
   
   def clean_avatar(self):
         file = self.cleaned_data.get('avatar')
-        valid_extensions = ['png', 'jpg', 'jpeg', 'ico']  # добавьте нужные расширения
+        valid_extensions = ['png', 'jpg', 'jpeg', 'ico']
         ext = file.name.split('.')[-1].lower()
         if ext not in valid_extensions:
           raise ValidationError('Insert a picture')
