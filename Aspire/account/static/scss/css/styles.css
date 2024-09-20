@@ -38,6 +38,7 @@
 :root {
   --gradient-dark: linear-gradient(#252525, #282828);
   --color-dark: #313131;
+  --color-dark-alt: #252525;
   --color-light: #FFFFFF;
   --color-light-trans: rgba(255, 255, 255, 0.8);
   --color-red: #FF4A4A;
@@ -253,7 +254,7 @@ svg * {
 }
 
 body {
-  background: var(--gradient-dark);
+  background: var(--color-dark-alt);
   color: var(--color-light);
   font-weight: 400;
   font-family: var(--font-family-base);
@@ -293,6 +294,13 @@ h2 {
   padding-block: var(--button-padding-y);
   border: 0;
   border-radius: var(--border-radius-small);
+}
+.button--small {
+  font-size: 20px;
+  font-weight: 500;
+  padding-block: 15px;
+  padding-inline: 50px;
+  letter-spacing: -1px;
 }
 @media (hover: hover) {
   .button:hover {
@@ -512,6 +520,9 @@ h2 {
   align-items: center;
   row-gap: 70px;
 }
+.main__list-user {
+  padding-block: 40px 30px;
+}
 .main__block {
   display: flex;
   flex-direction: column;
@@ -605,4 +616,168 @@ h2 {
 .main__author-name {
   font-size: 16px;
   font-weight: 500;
+}
+.main__profile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  align-items: center;
+}
+.main__profile-info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  align-items: center;
+}
+.main__profile-sub {
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+}
+.main__profile {
+  padding-top: 50px;
+}
+.main__profile-avatar {
+  border: 5px solid var(--color-light);
+  border-radius: 50%;
+}
+.main__sub-stats {
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+  font-family: var(--font-family-add);
+  font-size: 20px;
+}
+.main__sub-stats-item {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.post {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 36px;
+}
+.post__logo {
+  width: 128px;
+}
+.post__image-wrapper {
+  position: relative;
+}
+.post__icon-close {
+  position: absolute;
+  right: 36px;
+  top: 36px;
+  display: inline-block;
+  padding: 19px;
+  border-radius: var(--border-radius-large);
+  background-color: var(--color-red);
+}
+@media (hover: hover) {
+  .post__icon-close:hover {
+    opacity: 0.7;
+    transition-duration: 0.2s;
+  }
+}
+@media (hover: none) {
+  .post__icon-close:active {
+    opacity: 0.7;
+    transition-duration: 0.2s;
+  }
+}
+.post__info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1400px;
+}
+.post__header-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+}
+.post__header-about {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  row-gap: 12px;
+}
+.post__header-author {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+.post__header-avatar {
+  border: 2px solid var(--color-light);
+  border-radius: 50%;
+}
+.post__header-name {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+.post__header-date {
+  font-size: 20px;
+  font-weight: 300;
+}
+.post__stats-list {
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+  font-family: var(--font-family-add);
+  font-size: 20px;
+}
+.post__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+.post__comments-list {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  row-gap: 48px;
+  padding-bottom: 30px;
+}
+.post__comments-item {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  position: relative;
+}
+.post__comments-item::after {
+  content: "";
+  display: block;
+  width: 106px;
+  height: 1px;
+  background-color: var(--color-light);
+  position: absolute;
+  top: 75px;
+  left: 0;
+  z-index: 50;
+}
+.post__comments-avatar {
+  border: 2px solid var(--color-light);
+  border-radius: 50%;
+}
+.post__comments-text {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  align-items: start;
+  max-width: 342px;
+}
+.post__comments-name {
+  font-size: 20px;
+  font-weight: 500;
+}
+.post__comments-content {
+  font-size: 18px;
+  font-weight: 300;
+  opacity: 0.8;
 }/*# sourceMappingURL=styles.css.map */

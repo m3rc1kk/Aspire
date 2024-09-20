@@ -9,6 +9,14 @@
   border: 0;
   border-radius: var(--border-radius-small);
 
+  &--small {
+    font-size: 20px;
+    font-weight: 500;
+    padding-block: 15px;
+    padding-inline: 50px;
+    letter-spacing: -1px;
+  }
+
   @include hover {
     background-color: var(--color-light);
     color: var(--color-red);

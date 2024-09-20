@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from .forms import *
-from django.views.generic import ListView, DeleteView, UpdateView
+from django.views.generic import ListView, DeleteView, UpdateView, DetailView
 from .models import PostModel
 def welcome(request):
   return render(request, 'main/welcome.html')
@@ -36,3 +36,9 @@ class EditPostView(UpdateView):
   slug_field = 'slug'
   template_name = 'main/add_post.html'
   success_url = reverse_lazy('main:main_page')
+
+class DetailPostView(DetailView):
+  model = PostModel
+  template_name = 'main/post_detail.html'
+  slug_field = 'slug'
+

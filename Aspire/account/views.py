@@ -1,9 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import *
 from django.contrib.auth.decorators import login_required
-
+from django.views.generic import DetailView
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -44,3 +44,13 @@ def user_edit(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
 
     return render(request, 'registration/user_edit.html', {'user_form': user_form, 'profile_form': profile_form})
+
+class DetailUserView(DetailView):
+    model = User
+    template_name = 'registration/user_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        context['profile'] = get_object_or_404(Profile, user=user)
+        return context

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="post">
+        <div class="post__image-wrapper">
+            <div class="post__icon-close">
+                <img src="{% static 'images/close.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
+            </div>
+            <div class="post__image">
+                <img src="{% static 'images/behance_proj.png' %}" alt="" loading="lazy" class="post__img">
+            </div>
+        </div>
+
+        <div class="post__info">
+            <header class="post__info-header">
+                <div class="post__logo">
+                    <img src="{% static 'images/logo.png' %}" alt="" class="post__logo-image" width="57" height="57" loading="lazy">
+                </div>
+
+                <div class="post__header-stats">
+                    <h2 class="post__header-title">Stats</h2>
+                    <ul class="post__stats-list">
+                        <li class="main__sub-stats-item">
+                            <img src="{% static 'images/stats_heart.svg' %}" alt="" width="20" height="18" class="main__sub-item-img">
+                            <span class="main__sub-item-count">3242</span>
+                        </li>
+                        <li class="main__sub-stats-item">
+                            <img src="{% static 'images/stats_comment.svg' %}" alt="" width="20" height="20" class="main__sub-item-img">
+                            <span class="main__sub-item-count">233</span>
+                        </li>
+                        <li class="main__sub-stats-item">
+                            <img src="{% static 'images/view.svg' %}" alt="" width="24" height="24" class="main__sub-item-img">
+                            <span class="main__sub-item-count">10022</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="post__header-about">
+                    <div class="post__header-author">
+                        <div class="post__header-avatar">
+                            <img src="{% static 'images/avatar.png' %}" alt="" width="40" height="40" loading="lazy" class="post__header-avatar-img">
+                        </div>
+                        <span class="post__header-name">Eternity</span>
+                    </div>
+
+                    <span class="post__header-date">
+                        16.08.24
+                    </span>
+                </div>
+            </header>
+
+            <div class="post__body">
+                <div class="post__comments">
+                    <ul class="post__comments-list">
+                        <li class="post__comments-item">
+                            <div class="post__comments-avatar">
+                                <img src="{% static 'images/avatar.png' %}" alt="" width="52" height="52" loading="lazy" class="post__comments ava">
+                            </div>
+
+                            <div class="post__comments-text">
+                                <h4 class="post__comments-name">Volt</h4>
+                                <div class="post__comments-content">
+                                    <p>Great project, bro, so good</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="post__comments-item">
+                            <div class="post__comments-avatar">
+                                <img src="{% static 'images/avatar.png' %}" alt="" width="52" height="52" loading="lazy" class="post__comments ava">
+                            </div>
+
+                            <div class="post__comments-text">
+                                <h4 class="post__comments-name">Volt</h4>
+                                <div class="post__comments-content">
+                                    <p>Great project, bro, so good</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="post__comments-item">
+                            <div class="post__comments-avatar">
+                                <img src="{% static 'images/avatar.png' %}" alt="" width="52" height="52" loading="lazy" class="post__comments ava">
+                            </div>
+
+                            <div class="post__comments-text">
+                                <h4 class="post__comments-name">Volt</h4>
+                                <div class="post__comments-content">
+                                    <p>Great project, efwo, so good</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="post__form"></div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
