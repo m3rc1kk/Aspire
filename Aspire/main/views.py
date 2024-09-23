@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+
+from account.models import Profile
 from .forms import *
 from django.views.generic import ListView, DeleteView, UpdateView, DetailView
 from .models import PostModel
@@ -14,6 +16,7 @@ def add_post(request):
       post_form = post.save(commit=False)
       post_form.author = request.user
       post_form.save()
+      return redirect('main:main_page')
   else:
     post = PostForm()
 
@@ -39,6 +42,8 @@ class EditPostView(UpdateView):
 
 class DetailPostView(DetailView):
   model = PostModel
+  context_object_name = 'post'
   template_name = 'main/post_detail.html'
   slug_field = 'slug'
+
 

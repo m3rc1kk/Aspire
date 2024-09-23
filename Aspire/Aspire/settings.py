@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -124,7 +125,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -137,6 +138,7 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'main:main_page'
 
 AUTHENTICATION_BACKENDS = [
   'django.contrib.auth.backends.ModelBackend',

@@ -3,19 +3,19 @@
 {% block content %}
     <div class="post">
         <div class="post__image-wrapper">
-            <div class="post__icon-close">
+            <a class="post__icon-close" href="{% url 'main:main_page' %}">
                 <img src="{% static 'images/close.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
-            </div>
+            </a>
             <div class="post__image">
-                <img src="{% static 'images/behance_proj.png' %}" alt="" loading="lazy" class="post__img">
+                <img src="{{ post.image.url }}" alt="" width="1400" loading="lazy" class="post__img">
             </div>
         </div>
 
         <div class="post__info">
             <header class="post__info-header">
-                <div class="post__logo">
+                <a href="{% url 'main:main_page' %}" class="post__logo">
                     <img src="{% static 'images/logo.png' %}" alt="" class="post__logo-image" width="57" height="57" loading="lazy">
-                </div>
+                </a>
 
                 <div class="post__header-stats">
                     <h2 class="post__header-title">Stats</h2>
@@ -37,14 +37,14 @@
 
                 <div class="post__header-about">
                     <div class="post__header-author">
-                        <div class="post__header-avatar">
-                            <img src="{% static 'images/avatar.png' %}" alt="" width="40" height="40" loading="lazy" class="post__header-avatar-img">
-                        </div>
-                        <span class="post__header-name">Eternity</span>
+                        <a href="{% url 'profile' post.author.id %}" class="post__header-avatar">
+                            <img src="{{ post.author.profile.avatar.url }}" alt="" width="40" height="40" loading="lazy" class="post__header-avatar-img">
+                        </a>
+                        <span class="post__header-name">{{ post.author }}</span>
                     </div>
 
                     <span class="post__header-date">
-                        16.08.24
+                        {{ post.created|date:"d/m/y" }}
                     </span>
                 </div>
             </header>

@@ -8,26 +8,33 @@
             </div>
             <div class="main__header-right">
                 <a href="{% url 'main:add_post' %}" class="button button--transparent main__button">Share Work</a>
-                <a href="#" class="main__avatar">
-                    <img src="{% static 'images/avatar.png' %}" alt="" class="main__avatar-image" width="60" height="60" loading="lazy">
+                <a href="{% url 'profile' request.user.id %}" class="main__avatar">
+                    <img src="{{ request.user.profile.avatar.url }}" alt="" class="main__avatar-image" width="60" height="60" loading="lazy">
                 </a>
             </div>
         </header>
 
         <div class="main__body">
             <ul class="main__list">
+                {% for post in postmodel_list %}
                 <li class="main__item">
-                    <a href="#" class="main__link">
+                    <div class="main__link">
                         <div class="main__block">
-                            <div class="main__block-image">
-                                <img class="main__block-img" src="{% static 'images/1.png' %}" width="400" height="300" loading="lazy" alt="">
-                                <h4 class="main__block-image-title">Mobile App - Reelux</h4>
-                            </div>
+                            <a href="{% url 'main:detail_post' post.slug %}" class="main__block-image">
+                                <img class="main__block-img" src="{{ post.preview.url }}" width="400" height="300" loading="lazy" alt="">
+                                <h4 class="main__block-image-title">{{ post.title }}</h4>
+                            </a>
 
                             <div class="main__block-info">
                                 <div class="main__block-author">
-                                    <img src="{% static 'images/logo.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
-                                    <span class="main__author-name">Eter</span>
+                                    {% if post.author.profile.avatar %}
+                                        <a href="{% url 'profile' post.author.id %}">
+                                            <img src="{{ post.author.profile.avatar.url }}" width="36" height="36" loading="lazy" alt="" class="main__author-img">
+                                        </a>
+                                    {% else %}
+                                        <img src="{% static 'images/default_avatar.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
+                                    {% endif %}
+                                    <span class="main__author-name">{{ post.author }}</span>
                                 </div>
 
                                 <div class="main__block-stats">
@@ -42,204 +49,9 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </li>
-                <li class="main__item">
-                    <a href="#" class="main__link">
-                        <div class="main__block">
-                            <div class="main__block-image">
-                                <img class="main__block-img" src="{% static 'images/1.png' %}" width="400" height="300" loading="lazy" alt="">
-                                <h4 class="main__block-image-title">Mobile App - Reelux</h4>
-                            </div>
-
-                            <div class="main__block-info">
-                                <div class="main__block-author">
-                                    <img src="{% static 'images/logo.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
-                                    <span class="main__author-name">Eter</span>
-                                </div>
-
-                                <div class="main__block-stats">
-                                    <div class="main__stats-like">
-                                        <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
-                                        <span class="main__stats-like-count">2314</span>
-                                    </div>
-                                    <div class="main__stats-view">
-                                        <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
-                                        <span class="main__stats-view-count">2314</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="main__item">
-                    <a href="#" class="main__link">
-                        <div class="main__block">
-                            <div class="main__block-image">
-                                <img class="main__block-img" src="{% static 'images/1.png' %}" width="400" height="300" loading="lazy" alt="">
-                                <h4 class="main__block-image-title">Mobile App - Reelux</h4>
-                            </div>
-
-                            <div class="main__block-info">
-                                <div class="main__block-author">
-                                    <img src="{% static 'images/logo.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
-                                    <span class="main__author-name">Eter</span>
-                                </div>
-
-                                <div class="main__block-stats">
-                                    <div class="main__stats-like">
-                                        <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
-                                        <span class="main__stats-like-count">2314</span>
-                                    </div>
-                                    <div class="main__stats-view">
-                                        <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
-                                        <span class="main__stats-view-count">2314</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="main__item">
-                    <a href="#" class="main__link">
-                        <div class="main__block">
-                            <div class="main__block-image">
-                                <img class="main__block-img" src="{% static 'images/1.png' %}" width="400" height="300" loading="lazy" alt="">
-                                <h4 class="main__block-image-title">Mobile App - Reelux</h4>
-                            </div>
-
-                            <div class="main__block-info">
-                                <div class="main__block-author">
-                                    <img src="{% static 'images/logo.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
-                                    <span class="main__author-name">Eter</span>
-                                </div>
-
-                                <div class="main__block-stats">
-                                    <div class="main__stats-like">
-                                        <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
-                                        <span class="main__stats-like-count">2314</span>
-                                    </div>
-                                    <div class="main__stats-view">
-                                        <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
-                                        <span class="main__stats-view-count">2314</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="main__item">
-                    <a href="#" class="main__link">
-                        <div class="main__block">
-                            <div class="main__block-image">
-                                <img class="main__block-img" src="{% static 'images/1.png' %}" width="400" height="300" loading="lazy" alt="">
-                                <h4 class="main__block-image-title">Mobile App - Reelux</h4>
-                            </div>
-
-                            <div class="main__block-info">
-                                <div class="main__block-author">
-                                    <img src="{% static 'images/logo.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
-                                    <span class="main__author-name">Eter</span>
-                                </div>
-
-                                <div class="main__block-stats">
-                                    <div class="main__stats-like">
-                                        <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
-                                        <span class="main__stats-like-count">2314</span>
-                                    </div>
-                                    <div class="main__stats-view">
-                                        <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
-                                        <span class="main__stats-view-count">2314</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="main__item">
-                    <a href="#" class="main__link">
-                        <div class="main__block">
-                            <div class="main__block-image">
-                                <img class="main__block-img" src="{% static 'images/1.png' %}" width="400" height="300" loading="lazy" alt="">
-                                <h4 class="main__block-image-title">Mobile App - Reelux</h4>
-                            </div>
-
-                            <div class="main__block-info">
-                                <div class="main__block-author">
-                                    <img src="{% static 'images/logo.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
-                                    <span class="main__author-name">Eter</span>
-                                </div>
-
-                                <div class="main__block-stats">
-                                    <div class="main__stats-like">
-                                        <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
-                                        <span class="main__stats-like-count">2314</span>
-                                    </div>
-                                    <div class="main__stats-view">
-                                        <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
-                                        <span class="main__stats-view-count">2314</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="main__item">
-                    <a href="#" class="main__link">
-                        <div class="main__block">
-                            <div class="main__block-image">
-                                <img class="main__block-img" src="{% static 'images/1.png' %}" width="400" height="300" loading="lazy" alt="">
-                                <h4 class="main__block-image-title">Mobile App - Reelux</h4>
-                            </div>
-
-                            <div class="main__block-info">
-                                <div class="main__block-author">
-                                    <img src="{% static 'images/logo.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
-                                    <span class="main__author-name">Eter</span>
-                                </div>
-
-                                <div class="main__block-stats">
-                                    <div class="main__stats-like">
-                                        <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
-                                        <span class="main__stats-like-count">2314</span>
-                                    </div>
-                                    <div class="main__stats-view">
-                                        <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
-                                        <span class="main__stats-view-count">2314</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="main__item">
-                    <a href="#" class="main__link">
-                        <div class="main__block">
-                            <div class="main__block-image">
-                                <img class="main__block-img" src="{% static 'images/1.png' %}" width="400" height="300" loading="lazy" alt="">
-                                <h4 class="main__block-image-title">Mobile App - Reelux</h4>
-                            </div>
-
-                            <div class="main__block-info">
-                                <div class="main__block-author">
-                                    <img src="{% static 'images/logo.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
-                                    <span class="main__author-name">Eter</span>
-                                </div>
-
-                                <div class="main__block-stats">
-                                    <div class="main__stats-like">
-                                        <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
-                                        <span class="main__stats-like-count">2314</span>
-                                    </div>
-                                    <div class="main__stats-view">
-                                        <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
-                                        <span class="main__stats-view-count">2314</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

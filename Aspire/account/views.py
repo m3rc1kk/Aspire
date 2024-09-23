@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+
+from main.models import PostModel
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
@@ -17,6 +19,7 @@ def register(request):
             if user_login is not None:
                 if user_login.is_active:
                     login(request, user_login)
+                    return redirect('main:main_page')
                 else:
                     return HttpResponse('Your account is disabled.')
             else:
@@ -36,8 +39,9 @@ def user_edit(request):
         profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
         if user_form.is_valid():
             user_form.save()
-            if profile_form.is_valid():
-              profile_form.save()
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect('main:main_page')
            
     else:
         user_form = UserEditForm(instance=request.user)
@@ -53,4 +57,5 @@ class DetailUserView(DetailView):
         context = super().get_context_data(**kwargs)
         user = self.object
         context['profile'] = get_object_or_404(Profile, user=user)
+        context['postmodel_list'] = PostModel.objects.filter(author=user)
         return context

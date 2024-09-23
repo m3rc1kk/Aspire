@@ -64,6 +64,9 @@
     &-avatar {
       border: 2px solid var(--color-light);
       border-radius: 50%;
+      &-img {
+        border-radius: 50%;
+      }
     }
 
     &-name {
