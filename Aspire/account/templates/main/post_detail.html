@@ -6,6 +6,14 @@
             <a class="post__icon-close" href="{% url 'main:main_page' %}">
                 <img src="{% static 'images/close.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
             </a>
+            {% if request.user == post.author %}
+            <a class="post__icon-delete post__icon-close" href="{% url 'main:delete_post' post.slug %}">
+                <img src="{% static 'images/trash.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
+            </a>
+            <a class="post__icon-edit post__icon-close" href="{% url 'main:edit_post' post.slug %}">
+                <img src="{% static 'images/edit.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
+            </a>
+            {% endif %}
             <div class="post__image">
                 <img src="{{ post.image.url }}" alt="" width="1400" loading="lazy" class="post__img">
             </div>
@@ -32,6 +40,13 @@
                             <img src="{% static 'images/view.svg' %}" alt="" width="24" height="24" class="main__sub-item-img">
                             <span class="main__sub-item-count">10022</span>
                         </li>
+                    </ul>
+                    <ul class="post__tags post__stats-list">
+                        {% for tag in post.tags.all %}
+                            <li class="post__tags-item">
+                                <a href="{% url 'main:post_list_tag' tag.slug %}" class="post__tag">{{ tag }}</a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
 

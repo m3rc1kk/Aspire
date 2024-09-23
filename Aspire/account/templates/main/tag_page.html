@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="main container">
+        <header class="main__header">
+            <a href="{% url 'main:main_page' %}" class="main__logo">
+                <img src="{% static 'images/logo.png' %}" alt="" class="main__logo-image" width="70" height="70" loading="lazy">
+            </a>
+            <div class="main__header-right">
+                <a href="{% url 'main:add_post' %}" class="button button--transparent main__button">Share Work</a>
+                <a href="{% url 'profile' request.user.id %}" class="main__avatar">
+                    <img src="{{ request.user.profile.avatar.url }}" alt="" class="main__avatar-image" width="60" height="60" loading="lazy">
+                </a>
+            </div>
+        </header>
+
+        <div class="main__body">
+            <ul class="main__list">
+                {% for post in post_list %}
+                <li class="main__item">
+                    <div class="main__link">
+                        <div class="main__block">
+                            <a href="{% url 'main:detail_post' post.slug %}" class="main__block-image">
+                                <img class="main__block-img" src="{{ post.preview.url }}" width="400" height="300" loading="lazy" alt="">
+                                <h4 class="main__block-image-title">{{ post.title }}</h4>
+                            </a>
+
+                            <div class="main__block-info">
+                                <div class="main__block-author">
+                                    {% if post.author.profile.avatar %}
+                                        <a href="{% url 'profile' post.author.id %}">
+                                            <img src="{{ post.author.profile.avatar.url }}" width="36" height="36" loading="lazy" alt="" class="main__author-img">
+                                        </a>
+                                    {% else %}
+                                        <img src="{% static 'images/default_avatar.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
+                                    {% endif %}
+                                    <span class="main__author-name">{{ post.author }}</span>
+                                </div>
+
+                                <div class="main__block-stats">
+                                    <div class="main__stats-like">
+                                        <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
+                                        <span class="main__stats-like-count">2314</span>
+                                    </div>
+                                    <div class="main__stats-view">
+                                        <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
+                                        <span class="main__stats-view-count">2314</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

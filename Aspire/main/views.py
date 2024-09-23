@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from taggit.models import Tag
 
 from account.models import Profile
 from .forms import *
@@ -47,3 +48,9 @@ class DetailPostView(DetailView):
   slug_field = 'slug'
 
 
+
+def post_list_tag(request, tag_slug = None):
+  tag = get_object_or_404(Tag, slug=tag_slug)
+  post_list = PostModel.objects.filter(tags__in=[tag])
+
+  return render(request, 'main/tag_page.html', {'post_list': post_list})

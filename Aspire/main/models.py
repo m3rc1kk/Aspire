@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from taggit.managers import TaggableManager
+
 
 def image_directory_path(instance, filename):
     return f'{instance.author.username}/posts/image/{filename}'
@@ -19,6 +21,7 @@ class PostModel(models.Model):
     slug = models.SlugField(unique=True, max_length=50)
     created = models.DateTimeField(auto_now_add=True)
     publish = models.DateTimeField(default=timezone.now)
+    tags = TaggableManager()
 
     def save(self, *args, **kwargs):
         if self.pk:

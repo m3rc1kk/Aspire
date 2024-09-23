@@ -669,6 +669,16 @@ h2 {
   flex-direction: column;
   row-gap: 36px;
 }
+@media (hover: hover) {
+  .post__tag:hover {
+    color: var(--color-red);
+  }
+}
+@media (hover: none) {
+  .post__tag:active {
+    color: var(--color-red);
+  }
+}
 .post__logo {
   width: 128px;
 }
@@ -695,6 +705,12 @@ h2 {
     opacity: 0.7;
     transition-duration: 0.2s;
   }
+}
+.post__icon-delete {
+  right: 120px;
+}
+.post__icon-edit {
+  right: 204px;
 }
 .post__info-header {
   display: flex;

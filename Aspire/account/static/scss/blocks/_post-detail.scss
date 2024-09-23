@@ -5,6 +5,12 @@
   flex-direction: column;
   row-gap: 36px;
 
+  &__tag {
+    @include hover {
+      color: var(--color-red);
+    }
+  }
+
   &__logo {
     width: 128px;
   }
@@ -27,6 +33,14 @@
         opacity: .7;
         transition-duration: .2s;
       }
+    }
+
+    &-delete {
+      right: 120px;
+    }
+
+    &-edit {
+      right: 204px
     }
   }
 
