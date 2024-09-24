@@ -4,3 +4,7 @@ from .models import *
 @admin.register(PostModel)
 class PostAdmin(admin.ModelAdmin):
   pass
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+  list_display = ['id']

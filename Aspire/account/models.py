@@ -1,3 +1,5 @@
+from audioop import reverse
+
 from django.db import models
 from django.conf import settings
 
@@ -10,3 +12,4 @@ class Profile(models.Model):
 
   def __str__(self):
     return f'{self.user.username}'
+

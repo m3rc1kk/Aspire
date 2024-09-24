@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+    <div class="register__form-wrapper form-wrapper comment__form-wrapper">
+      <form method="post" class="form comment__form" action = "{% url 'main:post_comment' post.slug %}" >
+          <ul class="form__input-list">
+              <li>{% render_field form.body class+="comment__form-body form__input-item" placeholder='Your comment' autocomplete="new-password"  %}</li>
+          </ul>
+          {% csrf_token %}
+          <button type="submit" class="comment__form-button button">Send</button>
+      </form>
+    </div>
+{% endblock %}

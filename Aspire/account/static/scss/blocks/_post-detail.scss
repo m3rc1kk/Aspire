@@ -108,7 +108,7 @@
 
   &__body {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
     padding-top: 50px;
   }
@@ -166,5 +166,9 @@
     }
   }
 
+  &__form {
+    display: flex;
+    
+  }
   
 }

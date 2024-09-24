@@ -34,7 +34,7 @@
                         </li>
                         <li class="main__sub-stats-item">
                             <img src="{% static 'images/stats_comment.svg' %}" alt="" width="20" height="20" class="main__sub-item-img">
-                            <span class="main__sub-item-count">233</span>
+                            <span class="main__sub-item-count">{{ comments.count }}</span>
                         </li>
                         <li class="main__sub-stats-item">
                             <img src="{% static 'images/view.svg' %}" alt="" width="24" height="24" class="main__sub-item-img">
@@ -52,9 +52,15 @@
 
                 <div class="post__header-about">
                     <div class="post__header-author">
+                        {% if post.author.profile.avatar %}
                         <a href="{% url 'profile' post.author.id %}" class="post__header-avatar">
                             <img src="{{ post.author.profile.avatar.url }}" alt="" width="40" height="40" loading="lazy" class="post__header-avatar-img">
                         </a>
+                        {% else %}
+                            <a href="{% url 'profile' post.author.id %}" class="post__header-avatar">
+                                <img src="{% static 'images/default_avatar.png' %}" alt="" width="40" height="40" loading="lazy" class="post__header-avatar-img">
+                            </a>
+                        {% endif %}
                         <span class="post__header-name">{{ post.author }}</span>
                     </div>
 
@@ -67,46 +73,41 @@
             <div class="post__body">
                 <div class="post__comments">
                     <ul class="post__comments-list">
+                        {% for comment in comments %}
                         <li class="post__comments-item">
-                            <div class="post__comments-avatar">
-                                <img src="{% static 'images/avatar.png' %}" alt="" width="52" height="52" loading="lazy" class="post__comments ava">
-                            </div>
+
+                            {% if comment.author.profile.avatar %}
+                                <a href="{% url 'profile' comment.author.id %}" class="post__header-avatar">
+                                    <img src="{{ comment.author.profile.avatar.url }}" alt="" width="40" height="40" loading="lazy" class="post__header-avatar-img">
+                                </a>
+                            {% else %}
+                                <a href="{% url 'profile' comment.author.id %}" class="post__header-avatar">
+                                    <img src="{% static 'images/default_avatar.png' %}" alt="" width="40" height="40" loading="lazy" class="post__header-avatar-img">
+                                </a>
+                            {% endif %}
 
                             <div class="post__comments-text">
-                                <h4 class="post__comments-name">Volt</h4>
+                                <h4 class="post__comments-name">{{ comment.author }}</h4>
                                 <div class="post__comments-content">
-                                    <p>Great project, bro, so good</p>
+                                    <p>{{ comment.body }}</p>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="post__comments-item">
-                            <div class="post__comments-avatar">
-                                <img src="{% static 'images/avatar.png' %}" alt="" width="52" height="52" loading="lazy" class="post__comments ava">
                             </div>
 
-                            <div class="post__comments-text">
-                                <h4 class="post__comments-name">Volt</h4>
-                                <div class="post__comments-content">
-                                    <p>Great project, bro, so good</p>
-                                </div>
-                            </div>
+                            {% if comment.author == request.user %}
+                                <a class="comment__delete" href="{% url 'main:delete_comment' comment.id %}">
+                                    <img src="{% static 'images/trash.svg' %}" alt="" width="24" height="24" loading="lazy" class="post__img">
+                                </a>
+                            {% endif %}
                         </li>
-                        <li class="post__comments-item">
-                            <div class="post__comments-avatar">
-                                <img src="{% static 'images/avatar.png' %}" alt="" width="52" height="52" loading="lazy" class="post__comments ava">
-                            </div>
-
-                            <div class="post__comments-text">
-                                <h4 class="post__comments-name">Volt</h4>
-                                <div class="post__comments-content">
-                                    <p>Great project, efwo, so good</p>
-                                </div>
-                            </div>
-                        </li>
+                        {% empty %}
+                            <h1>No comments</h1>
+                        {% endfor %}
                     </ul>
                 </div>
 
-                <div class="post__form"></div>
+                <div class="post__form">
+                    {% include 'main/comment_form.html' %}
+                </div>
             </div>
         </div>
 

@@ -50,7 +50,7 @@
                 <li class="main__item">
                     <div class="main__link">
                         <div class="main__block">
-                            <a href="{% url 'main:detail_post' post.slug %}" class="main__block-image">
+                            <a href="{{ post.get_absolute_url }}" class="main__block-image">
                                 <img class="main__block-img" src="{{ post.preview.url }}" width="400" height="300" loading="lazy" alt="">
                                 <h4 class="main__block-image-title">{{ post.title }}</h4>
                             </a>
@@ -62,7 +62,9 @@
                                             <img src="{{ post.author.profile.avatar.url }}" width="36" height="36" loading="lazy" alt="" class="main__author-img">
                                         </a>
                                     {% else %}
-                                        <img src="{% static 'images/default_avatar.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-image">
+                                        <a href="{% url 'profile' post.author.id %}">
+                                            <img src="{% static 'images/default_avatar.png' %}" width="36" height="36" loading="lazy" alt="" class="main__author-img">
+                                        </a>
                                     {% endif %}
                                     <span class="main__author-name">{{ post.author }}</span>
                                 </div>

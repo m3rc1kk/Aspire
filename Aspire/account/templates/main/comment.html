@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="reset__form-wrapper form-wrapper">
+      <img class="reset__form-logo form__logo" src="{% static 'images/logo.png' %}" width="91" height="91" loading="lazy">
+      <h1 class="form__title reset__complete-title">Your comment has been added</h1>
+      <a href="{{ post.get_absolute_url }}" class="button reset__complete-button">Back to Post</a>
+</div>
+{% endblock %}
