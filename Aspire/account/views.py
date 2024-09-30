@@ -3,7 +3,8 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
-from main.models import PostModel, Comment
+from main.models import PostModel, Comment, Like
+from main.views import r
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
@@ -58,9 +59,16 @@ class DetailUserView(DetailView):
         context = super().get_context_data(**kwargs)
         user = self.object
         post_list = PostModel.objects.filter(author=user)
+        for post in post_list:
+            total_views = r.get(f'image:{post.id}:view')
+            post.total_views = total_views.decode() if total_views else 0
+            post.total_likes = post.likes.count
+
         context['profile'] = get_object_or_404(Profile, user=user)
         context['postmodel_list'] = post_list
         context['comments'] = Comment.objects.filter(post__in=post_list).count()
+        context['likes'] = Like.objects.filter(post__in = post_list).count()
+
         return context
 
 

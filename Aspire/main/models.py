@@ -73,3 +73,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment from {self.author}'
+
+
+class Like(models.Model):
+    post = models.ForeignKey(PostModel, on_delete=models.CASCADE, related_name='likes')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'Like'
+
+    def __str__(self):
+        return f'{self.author} like {self.post}'

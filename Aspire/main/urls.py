@@ -14,4 +14,5 @@ urlpatterns = [
   path('<slug:post_slug>/comment/', views.post_comment, name='post_comment'),
 
   path('delete_comment/<int:pk>/', views.DeleteCommentView.as_view(), name='delete_comment'),
+  path('like/<slug:post_slug>/', views.PostLike, name='like_post'),
 ]

@@ -715,6 +715,9 @@ h2 {
 .post__icon-edit {
   right: 204px;
 }
+.post__icon-like {
+  top: 120px;
+}
 .post__info-header {
   display: flex;
   align-items: center;

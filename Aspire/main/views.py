@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.text import slugify
+from django.views import View
 from taggit.models import Tag
 from .forms import *
 from django.views.generic import ListView, DeleteView, UpdateView, DetailView
-from .models import PostModel, Comment
+from .models import PostModel, Comment, Like
 from django.views.decorators.http import require_POST
 import redis
 from django.conf import settings
@@ -51,6 +52,8 @@ class ListPostView(ListView):
     for post in posts:
       total_views = r.get(f'image:{post.id}:view')
       post.total_views = total_views.decode() if total_views else 0
+      post.total_likes = post.likes.count
+
 
     context['posts'] = posts
     return context
@@ -79,6 +82,7 @@ class DetailPostView(DetailView):
     context['comments'] = self.object.comments.all()
     context['form'] = CommentForm()
     context['total_views'] = r.incr(f'image:{self.object.id}:view')
+    context['has_liked'] = Like.objects.filter(author=self.request.user, post=self.object).exists()
     return context
 
 
@@ -86,6 +90,10 @@ class DetailPostView(DetailView):
 def post_list_tag(request, tag_slug = None):
   tag = get_object_or_404(Tag, slug=tag_slug)
   post_list = PostModel.objects.filter(tags__in=[tag])
+  for post in post_list:
+    total_views = r.get(f'image:{post.id}:view')
+    post.total_views = total_views.decode() if total_views else 0
+    post.total_likes = post.likes.count
 
   return render(request, 'main/tag_page.html', {'post_list': post_list, 'tag':tag})
 
@@ -108,3 +116,15 @@ class DeleteCommentView(DeleteView):
   def get_success_url(self):
     post_slug = self.object.post.slug
     return reverse_lazy('main:detail_post', args=[post_slug])
+
+
+def PostLike(request, post_slug):
+  post = get_object_or_404(PostModel, slug = post_slug)
+  try:
+    like = Like.objects.get(author=request.user, post=post)
+    like.delete()
+  except:
+    new_like = Like(author=request.user, post = post)
+    new_like.save()
+
+  return redirect(f'/detail_post/{post_slug}/')

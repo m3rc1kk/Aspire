@@ -63,7 +63,7 @@ totalFollowers – 1;
                 <ul class="main__sub-stats">
                     <li class="main__sub-stats-item">
                         <img src="{% static 'images/stats_heart.svg' %}" alt="" width="20" height="18" class="main__sub-item-img">
-                        <span class="main__sub-item-count">3242</span>
+                        <span class="main__sub-item-count">{{ likes }}</span>
                     </li>
                     <li class="main__sub-stats-item">
                         <img src="{% static 'images/stats_comment.svg' %}" alt="" width="20" height="20" class="main__sub-item-img">
@@ -111,11 +111,11 @@ totalFollowers – 1;
                                 <div class="main__block-stats">
                                     <div class="main__stats-like">
                                         <img src="{% static 'images/heart.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-like-image">
-                                        <span class="main__stats-like-count">2314</span>
+                                        <span class="main__stats-like-count">{{ post.total_likes }}</span>
                                     </div>
                                     <div class="main__stats-view">
                                         <img src="{% static 'images/eye.svg' %}" width="24" height="24" loading="lazy" alt="" class="main__stats-view-image">
-                                        <span class="main__stats-view-count">2314</span>
+                                        <span class="main__stats-view-count">{{ post.total_views }}</span>
                                     </div>
                                 </div>
                             </div>

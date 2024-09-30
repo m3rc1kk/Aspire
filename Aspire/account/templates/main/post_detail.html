@@ -6,6 +6,13 @@
             <a class="post__icon-close" href="{% url 'main:main_page' %}">
                 <img src="{% static 'images/close.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
             </a>
+            <a class="post__icon-close post__icon-like" href="{% url 'main:like_post' post.slug %}">
+                {% if has_liked %}
+                    <img src="{% static 'images/mdi_heart.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
+                {% else %}
+                    <img src="{% static 'images/heart.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
+                {% endif %}
+            </a>
             {% if request.user == post.author %}
             <a class="post__icon-delete post__icon-close" href="{% url 'main:delete_post' post.slug %}">
                 <img src="{% static 'images/trash.svg' %}" alt="" width="32" height="32" loading="lazy" class="post__img">
@@ -30,7 +37,7 @@
                     <ul class="post__stats-list">
                         <li class="main__sub-stats-item">
                             <img src="{% static 'images/stats_heart.svg' %}" alt="" width="20" height="18" class="main__sub-item-img">
-                            <span class="main__sub-item-count">3242</span>
+                            <span class="main__sub-item-count">{{ post.likes.count }}</span>
                         </li>
                         <li class="main__sub-stats-item">
                             <img src="{% static 'images/stats_comment.svg' %}" alt="" width="20" height="20" class="main__sub-item-img">
