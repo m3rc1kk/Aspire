@@ -497,6 +497,9 @@ h2 {
   border-radius: var(--border-radius-large);
 }
 
+.main__body-title {
+  padding-top: 50px;
+}
 .main__header {
   padding-top: 60px;
   display: flex;

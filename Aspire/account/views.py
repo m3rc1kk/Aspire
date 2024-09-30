@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.http import require_POST
 
-from main.models import PostModel
+from main.models import PostModel, Comment
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
@@ -56,6 +57,10 @@ class DetailUserView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.object
+        post_list = PostModel.objects.filter(author=user)
         context['profile'] = get_object_or_404(Profile, user=user)
-        context['postmodel_list'] = PostModel.objects.filter(author=user)
+        context['postmodel_list'] = post_list
+        context['comments'] = Comment.objects.filter(post__in=post_list).count()
         return context
+
+

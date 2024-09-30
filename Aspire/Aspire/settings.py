@@ -163,3 +163,7 @@ SOCIAL_AUTH_PIPELINE = [
   'social_core.pipeline.social_auth.load_extra_data',
   'social_core.pipeline.user.user_details',
 ]
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0

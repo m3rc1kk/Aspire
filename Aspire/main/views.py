@@ -6,6 +6,11 @@ from .forms import *
 from django.views.generic import ListView, DeleteView, UpdateView, DetailView
 from .models import PostModel, Comment
 from django.views.decorators.http import require_POST
+import redis
+from django.conf import settings
+
+r = redis.Redis(host = settings.REDIS_HOST, port = settings.REDIS_PORT, db = settings.REDIS_DB)
+
 def welcome(request):
   return render(request, 'main/welcome.html')
 
@@ -39,6 +44,17 @@ class ListPostView(ListView):
   model = PostModel
   template_name = 'main/main_page.html'
 
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    posts = self.object_list
+
+    for post in posts:
+      total_views = r.get(f'image:{post.id}:view')
+      post.total_views = total_views.decode() if total_views else 0
+
+    context['posts'] = posts
+    return context
+
 class DeletePostView(DeleteView):
   model = PostModel
   template_name = 'main/delete_post.html'
@@ -60,9 +76,9 @@ class DetailPostView(DetailView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    user = self.object
     context['comments'] = self.object.comments.all()
     context['form'] = CommentForm()
+    context['total_views'] = r.incr(f'image:{self.object.id}:view')
     return context
 
 
@@ -71,15 +87,12 @@ def post_list_tag(request, tag_slug = None):
   tag = get_object_or_404(Tag, slug=tag_slug)
   post_list = PostModel.objects.filter(tags__in=[tag])
 
-  return render(request, 'main/tag_page.html', {'post_list': post_list})
+  return render(request, 'main/tag_page.html', {'post_list': post_list, 'tag':tag})
 
 
 @require_POST
 def post_comment(request, post_slug):
   post = get_object_or_404(PostModel, slug = post_slug)
-
-  comment = None
-
   form = CommentForm(request.POST)
   if form.is_valid():
     comment = form.save(commit=False)
