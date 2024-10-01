@@ -9,8 +9,6 @@
           {% render_field user_form.title class+="register__form-title form__title" %}
           <ul class="form__input-list">
             <li>{% render_field user_form.username class+="register__form-username form__input-item" placeholder='Username' autocomplete="new-password" %}</li>
-            <li>{% render_field user_form.email class+="register__form-email form__input-item" placeholder='E-mail' autocomplete="new-password" %}</li>
-          </ul>
           <div class="file-upload">
               {{profile_form.avatar|add_class:'file-input'|attr:'id:file'}}
               <label for="file" class="file-label">Add Avatar</label>

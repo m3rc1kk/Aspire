@@ -34,7 +34,7 @@ class UserCreationForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
   class Meta:
     model = User
-    fields = ('username', 'email')
+    fields = ('username',)
 
   def clean_email(self):
         data = self.cleaned_data['email']

@@ -9,7 +9,16 @@
             <div class="main__header-right">
                 <a href="{% url 'main:add_post' %}" class="button button--transparent main__button">Share Work</a>
                 <a href="{% url 'profile' request.user.id %}" class="main__avatar">
-                    <img src="{{ request.user.profile.avatar.url }}" alt="" class="main__avatar-image" width="60" height="60" loading="lazy">
+                    {% if request.user.profile.avatar %}
+                        <a href="{% url 'profile' request.user.id %}">
+                            <img src="{{ request.user.profile.avatar.url }}" alt="" class="main__avatar-image" width="60" height="60" loading="lazy">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'profile' request.user.id %}">
+                            <img src="{% static 'images/default_avatar.png' %}" width="60" height="60" loading="lazy" alt="" class="main__avatar-image">
+                        </a>
+                    {% endif %}
+
                 </a>
             </div>
         </header>
