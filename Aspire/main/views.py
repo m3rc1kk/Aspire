@@ -9,13 +9,16 @@ from .models import PostModel, Comment, Like
 from django.views.decorators.http import require_POST
 import redis
 from django.conf import settings
+from .permissions import AuthorPermissionMixin
+from django.contrib.auth.decorators import login_required
+
 
 r = redis.Redis(host = settings.REDIS_HOST, port = settings.REDIS_PORT, db = settings.REDIS_DB)
 
 def welcome(request):
   return render(request, 'main/welcome.html')
 
-
+@login_required
 def add_post(request):
   if request.method == 'POST':
     post = PostForm(request.POST, request.FILES)
@@ -58,13 +61,13 @@ class ListPostView(ListView):
     context['posts'] = posts
     return context
 
-class DeletePostView(DeleteView):
+class DeletePostView(AuthorPermissionMixin, DeleteView):
   model = PostModel
   template_name = 'main/delete_post.html'
   slug_field = 'slug'
   success_url = reverse_lazy('main:main_page')
 
-class EditPostView(UpdateView):
+class EditPostView(AuthorPermissionMixin, UpdateView):
   model = PostModel
   form_class = PostForm
   slug_field = 'slug'
@@ -97,7 +100,7 @@ def post_list_tag(request, tag_slug = None):
 
   return render(request, 'main/tag_page.html', {'post_list': post_list, 'tag':tag})
 
-
+@login_required
 @require_POST
 def post_comment(request, post_slug):
   post = get_object_or_404(PostModel, slug = post_slug)
@@ -110,14 +113,14 @@ def post_comment(request, post_slug):
   return render(request, 'main/comment.html', {'form': form, 'post': post})
 
 
-class DeleteCommentView(DeleteView):
+class DeleteCommentView(AuthorPermissionMixin, DeleteView):
   model = Comment
   template_name = 'main/delete_comment.html'
   def get_success_url(self):
     post_slug = self.object.post.slug
     return reverse_lazy('main:detail_post', args=[post_slug])
 
-
+@login_required
 def PostLike(request, post_slug):
   post = get_object_or_404(PostModel, slug = post_slug)
   try:

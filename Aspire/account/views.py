@@ -1,13 +1,13 @@
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.decorators.http import require_POST
-
 from main.models import PostModel, Comment, Like
 from main.views import r
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
+
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

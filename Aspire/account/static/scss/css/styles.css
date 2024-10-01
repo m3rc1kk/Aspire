@@ -640,7 +640,13 @@ h2 {
 .main__profile-sub {
   display: flex;
   align-items: center;
-  column-gap: 30px;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.main__profile-buttons {
+  display: flex;
+  column-gap: 16px;
+  align-items: center;
 }
 .main__profile {
   padding-top: 50px;
@@ -663,6 +669,9 @@ h2 {
   display: flex;
   align-items: center;
   column-gap: 8px;
+}
+.main__sub-button {
+  cursor: pointer;
 }
 
 .post {
